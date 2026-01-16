@@ -1,12 +1,26 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
-# Check if Homebrew's bin exists and if it's not already in the PATH
-if [ -x "/opt/homebrew/bin/brew" ] && [[ ":$PATH:" != *":/opt/homebrew/bin:"* ]]; then
+# Detect OS
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    OS_TYPE="macOS"
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    OS_TYPE="Linux"
+fi
+
+# Check if Homebrew's bin exists and if it's not already in the PATH (macOS only)
+if [ "$OS_TYPE" = "macOS" ] && [ -x "/opt/homebrew/bin/brew" ] && [[ ":$PATH:" != *":/opt/homebrew/bin:"* ]]; then
     export PATH="/opt/homebrew/bin:$PATH"
+fi
+
+# Check if VS Code is installed
+if ! command -v code &>/dev/null; then
+    echo "VS Code is not installed. Skipping VS Code setup..."
+    exit 0
 fi
 
 # Install VS Code Extensions
 extensions=(
+    peacock.vscode-color-picker
     batisteo.vscode-django
     charliermarsh.ruff
     esbenp.prettier-vscode
@@ -42,8 +56,12 @@ done
 
 echo "VS Code extensions have been installed."
 
-# Define the target directory for VS Code user settings on macOS
-VSCODE_USER_SETTINGS_DIR="${HOME}/Library/Application Support/Code/User"
+# Define the target directory for VS Code user settings based on OS
+if [ "$OS_TYPE" = "macOS" ]; then
+    VSCODE_USER_SETTINGS_DIR="${HOME}/Library/Application Support/Code/User"
+elif [ "$OS_TYPE" = "Linux" ]; then
+    VSCODE_USER_SETTINGS_DIR="${HOME}/.config/Code/User"
+fi
 
 # Check if VS Code settings directory exists
 if [ -d "$VSCODE_USER_SETTINGS_DIR" ]; then
@@ -53,7 +71,7 @@ if [ -d "$VSCODE_USER_SETTINGS_DIR" ]; then
 
     echo "VS Code settings and keybindings have been updated."
 else
-    echo "VS Code user settings directory does not exist. Please ensure VS Code is installed."
+    echo "VS Code user settings directory does not exist. Please ensure VS Code is installed and has been opened at least once."
 fi
 
 # Open VS Code to sign-in to extensions

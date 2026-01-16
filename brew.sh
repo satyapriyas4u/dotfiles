@@ -51,13 +51,14 @@ packages=(
     "git"
     "tree"
     "node"
-    "uv"
     "pipx"
     "gemini-cli"
     "gh"
     "ripgrep"
     "tealdeer"
     "imagemagick"
+    "ffmpeg"
+    "glab"
 )
 
 # Loop over the array to install each application.

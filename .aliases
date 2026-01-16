@@ -4,6 +4,7 @@ alias hg='history 0 | grep'
 alias yt="code $HOME/My_Drive/YouTube/Scripts/"
 alias cyt="cd $HOME/My_Drive/YouTube/Scripts/"
 alias oyt="open $HOME/My_Drive/YouTube/Scripts/"
+alias supdate='${HOME}/dotfiles/installs/update_upgrade.sh'
 
 # Detect which `ls` flavor is in use
 if ls --color >/dev/null 2>&1; then # GNU `ls`

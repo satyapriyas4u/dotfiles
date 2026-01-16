@@ -1,11 +1,40 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 ############################
 # This script creates symlinks from the home directory to any desired dotfiles in $HOME/dotfiles
-# And also installs MacOS Software
-# And also installs Homebrew Packages and Casks (Apps)
-# And also sets up VS Code
-# And also sets up Sublime Text
+# Detects OS and runs appropriate installation scripts
+# Checks for zsh before proceeding
 ############################
+
+# Check if zsh is installed
+if ! command -v zsh &>/dev/null; then
+    echo "Error: zsh is not installed."
+    echo ""
+    echo "Please install zsh first:"
+    echo "  On macOS: brew install zsh"
+    echo "  On Ubuntu/Debian: sudo apt-get install zsh"
+    echo ""
+    exit 1
+fi
+
+if [ -f /etc/os-release ]; then
+  . /etc/os-release
+  echo "$NAME $VERSION"
+fi
+
+
+echo "zsh is installed. Proceeding with installation..."
+
+# Detect OS
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    OS_TYPE="macOS"
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    OS_TYPE="Linux"
+else
+    echo "Error: Unsupported operating system."
+    exit 1
+fi
+
+echo "Detected OS: $OS_TYPE"
 
 # dotfiles directory
 dotfiledir="${HOME}/dotfiles"
@@ -27,11 +56,16 @@ done
 mkdir -p "${HOME}/.config/ruff"
 ln -sf "${dotfiledir}/settings/ruff.toml" "${HOME}/.config/ruff/ruff.toml"
 
-# Run the MacOS Script
-./macOS.sh
-
-# Run the Homebrew Script
-./brew.sh
+# Run OS-specific scripts
+if [ "$OS_TYPE" = "macOS" ]; then
+    echo "Running macOS installation scripts..."
+    ./macOS.sh
+    ./brew.sh
+elif [ "$OS_TYPE" = "Linux" ]; then
+    echo "Running Ubuntu/Linux installation scripts..."
+    ./linux-packages.sh
+    ./ubuntu.sh
+fi
 
 # Run VS Code Script
 ./vscode.sh
