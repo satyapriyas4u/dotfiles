@@ -1,0 +1,11 @@
+[/]
+color-scheme='prefer-dark'
+cursor-size=32
+enable-animations=true
+font-hinting='medium'
+gtk-theme='Yaru-viridian-dark'
+icon-theme='Yaru-viridian'
+overlay-scrolling=true
+show-battery-percentage=false
+text-scaling-factor=1.25
+toolkit-accessibility=false

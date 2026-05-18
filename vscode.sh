@@ -18,43 +18,14 @@ if ! command -v code &>/dev/null; then
     exit 0
 fi
 
-# Install VS Code Extensions
-extensions=(
-    peacock.vscode-color-picker
-    batisteo.vscode-django
-    charliermarsh.ruff
-    esbenp.prettier-vscode
-    formulahendry.code-runner
-    foxundermoon.shell-format
-    github.copilot
-    github.copilot-chat
-    mechatroner.rainbow-csv
-    monosans.djlint
-    ms-python.mypy-type-checker
-    ms-python.python
-    ms-toolsai.jupyter
-    ms-vscode.theme-predawnkit
-    mtxr.sqltools
-    mtxr.sqltools-driver-sqlite
-    ritwickdey.liveServer
-    tamasfe.even-better-toml
-    teabyii.ayu
-    tomoki1207.pdf
-)
-
-# Get a list of all currently installed extensions.
-installed_extensions=$(code --list-extensions)
-
-for extension in "${extensions[@]}"; do
-    if echo "$installed_extensions" | grep -qi "^$extension$"; then
-        echo "$extension is already installed. Skipping..."
-    else
-        echo "Installing $extension..."
-        code --install-extension "$extension"
-    fi
-done
-
-echo "VS Code extensions have been installed."
+# Install VS Code extensions from the captured snapshot. The list is
+# refreshed by `./capture/capture-vscode.sh`.
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -x "${SCRIPT_DIR}/installs/restore-vscode-extensions.sh" ]; then
+    "${SCRIPT_DIR}/installs/restore-vscode-extensions.sh"
+else
+    echo "restore-vscode-extensions.sh not found; skipping extension install."
+fi
 
 # Define the target directory for VS Code user settings based on OS
 if [ "$OS_TYPE" = "macOS" ]; then

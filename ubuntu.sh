@@ -10,6 +10,12 @@ echo "Updating package lists..."
 sudo apt-get update
 
 # Ensure zsh is installed (in case it wasn't installed via packages)
+if ! command -v nala &>/dev/null; then
+    echo "Installing nala..."
+    sudo apt-get install -y nala
+fi
+
+# Ensure zsh is installed (in case it wasn't installed via packages)
 if ! command -v zsh &>/dev/null; then
     echo "Installing zsh..."
     sudo apt-get install -y zsh
@@ -65,5 +71,36 @@ fi
 # Create the tutorial virtual environment
 python3 -m venv "${HOME}/tutorial"
 echo "Tutorial virtual environment created at ~/tutorial"
+
+# --------------------------------------------------------------------------
+# Snapshot-based restore (apt list, snap, flatpak, vscode extensions,
+# gnome extensions, dconf). Skip with SKIP_RESTORE=1 if you only want the
+# base setup above.
+# --------------------------------------------------------------------------
+if [ -z "${SKIP_RESTORE:-}" ] && [ -d "${dotfiledir:-${HOME}/dotfiles}/snapshots" ]; then
+    DOTDIR="${dotfiledir:-${HOME}/dotfiles}"
+    echo ""
+    echo "==> Restoring system state from snapshots/"
+
+    if [ -f "${DOTDIR}/snapshots/THIRD-PARTY-REPOS.md" ]; then
+        echo "    NOTE: Some apt packages need third-party repos."
+        echo "          See ${DOTDIR}/snapshots/THIRD-PARTY-REPOS.md"
+        echo "          and set them up before running this section."
+        echo ""
+        read -r -p "    Continue with snapshot restore now? [y/N] " ans
+        if [[ ! "$ans" =~ ^[Yy]$ ]]; then
+            echo "    Skipping snapshot restore. Re-run installs/restore-*.sh manually."
+            SKIP_RESTORE=1
+        fi
+    fi
+
+    if [ -z "${SKIP_RESTORE:-}" ]; then
+        "${DOTDIR}/installs/restore-apt-packages.sh"
+        "${DOTDIR}/installs/restore-snap-packages.sh"
+        "${DOTDIR}/installs/restore-flatpak-apps.sh"
+        # VS Code extensions / GNOME extensions / dconf are handled after
+        # editor + GNOME tooling are confirmed present; see install.sh.
+    fi
+fi
 
 echo "Ubuntu-specific configuration complete!"

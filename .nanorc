@@ -1,0 +1,32 @@
+# Editing behaviour
+set autoindent
+set linenumbers
+set mouse
+set smarthome
+set softwrap
+set atblanks
+set tabsize 4
+set tabstospaces
+set trimblanks
+set positionlog
+set wordbounds
+
+# Visual
+set titlecolor brightwhite,blue
+set statuscolor brightwhite,green
+set keycolor cyan
+set functioncolor cyan
+set numbercolor yellow
+set selectedcolor brightwhite,magenta
+set indicator
+set constantshow
+
+# Backups go to ~/.cache/nano so you can recover after a crash without
+# scattering ~ with .save files.
+set backup
+set backupdir "~/.cache/nano/backups"
+
+# Bring in the system-wide syntax highlighting bundle (Ubuntu installs this
+# with the `nano` package).
+include "/usr/share/nano/*.nanorc"
+include "/usr/share/nano/extra/*.nanorc"

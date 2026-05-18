@@ -40,7 +40,7 @@ echo "Detected OS: $OS_TYPE"
 dotfiledir="${HOME}/dotfiles"
 
 # list of files/folders to symlink in ${homedir}
-files=(zshrc zprofile zprompt bashrc bash_profile bash_prompt aliases private)
+files=(zshrc zprofile zprompt bashrc bash_profile bash_prompt aliases private nanorc)
 
 # change to the dotfiles directory
 echo "Changing to the ${dotfiledir} directory"
@@ -72,5 +72,19 @@ fi
 
 # Run the Sublime Script
 ./sublime.sh
+
+# Linux-only: restore GNOME extensions + targeted dconf settings from
+# snapshots/ (terminal profile, interface tweaks, etc.). Skipped on macOS
+# and when SKIP_RESTORE=1.
+if [ "$OS_TYPE" = "Linux" ] && [ -z "${SKIP_RESTORE:-}" ] && [ -d "${dotfiledir}/snapshots" ]; then
+    if [ -x "${dotfiledir}/installs/restore-gnome-extensions.sh" ]; then
+        echo "Restoring GNOME extensions..."
+        "${dotfiledir}/installs/restore-gnome-extensions.sh"
+    fi
+    if [ -x "${dotfiledir}/installs/restore-dconf.sh" ]; then
+        echo "Restoring dconf settings..."
+        "${dotfiledir}/installs/restore-dconf.sh"
+    fi
+fi
 
 echo "Installation Complete!"

@@ -56,6 +56,45 @@ This script will:
 -  Install Homebrew packages and casks
 -  Configure Sublime Text and Visual Studio Code
 
+## Replicating a Full Ubuntu Setup (capture / restore)
+
+For Ubuntu users who want to mirror an existing machine onto a new one, this
+repo includes a snapshot layer that records:
+
+-  apt-installed packages (`snapshots/apt-packages.txt`)
+-  snap packages (`snapshots/snap-packages.txt`)
+-  flatpak applications (`snapshots/flatpak-apps.txt`)
+-  VS Code extensions (`snapshots/vscode-extensions.txt`)
+-  GNOME Shell extensions + their settings (`snapshots/gnome-extensions-enabled.txt`, `snapshots/dconf/gnome-shell-extensions.dconf`)
+-  Targeted dconf branches: gnome-terminal profile, desktop interface,
+   input sources, mutter, keybindings (`snapshots/dconf/*.dconf`)
+
+### Refreshing the snapshot (on the current laptop)
+
+```sh
+./capture/capture-all.sh
+git add snapshots/ && git commit -m "refresh snapshot"
+git push
+```
+
+Each capture script is self-contained — run individually if you only want
+to refresh one slice (e.g. `./capture/capture-vscode.sh`).
+
+### Restoring onto a new laptop
+
+1.  Clone this repo and run the usual `./install.sh`. The Linux path
+    detects the `snapshots/` directory and offers to restore from it.
+2.  Before the apt restore, set up any third-party repositories listed in
+    [snapshots/THIRD-PARTY-REPOS.md](snapshots/THIRD-PARTY-REPOS.md)
+    (Chrome, VS Code, AnyDesk, Grafana, VirtualBox, Warp, Zoom, etc.).
+3.  GNOME extensions are reinstalled fresh from extensions.gnome.org via
+    `gnome-extensions-cli`. You'll need to log out and back in once for
+    the shell to load them.
+
+To skip the snapshot restore on a given run (e.g. when bootstrapping a
+machine you don't want fully populated), export `SKIP_RESTORE=1` before
+running `./install.sh`.
+
 ## Configuration Files
 
 -  `.bashrc` & `.zshrc`: Shell configuration files for Bash and Zsh.

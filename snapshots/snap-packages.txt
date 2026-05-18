@@ -1,0 +1,8 @@
+brave
+chromium
+firefox
+gimp
+postman
+slack
+snap-store
+thunderbird

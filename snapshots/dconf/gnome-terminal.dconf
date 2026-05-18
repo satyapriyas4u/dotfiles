@@ -1,0 +1,13 @@
+[legacy]
+new-terminal-mode='window'
+theme-variant='system'
+
+[legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+audible-bell=true
+cursor-shape='ibeam'
+default-size-columns=105
+default-size-rows=35
+login-shell=false
+preserve-working-directory='never'
+use-custom-command=false
+visible-name='Satyapriya'
