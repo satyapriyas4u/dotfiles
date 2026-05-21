@@ -12,5 +12,15 @@ if ! command -v apt-mark &>/dev/null; then
     exit 0
 fi
 
-apt-mark showmanual | sort > "$OUT"
+# Strip packages that don't exist in the default Ubuntu 24.04 archive (so a
+# fresh-laptop apt restore doesn't fail on them):
+#   - libappindicator1, libdbusmenu-gtk4: removed upstream / renamed
+#   - linux-(headers|modules)-X.Y.Z-NNNNNN[-generic]: mainline-PPA kernels,
+#     installed by hand from kernel.ubuntu.com — not available via apt
+#   - pulseaudio, pulseaudio-utils: 24.04 ships pipewire by default; pulling
+#     pulseaudio in removes pipewire-audio (audio will be silently broken)
+#   - speedtest: Ookla's apt repo (`packages.ookla.com`), not Ubuntu's
+apt-mark showmanual \
+    | grep -Ev '^(libappindicator1|libdbusmenu-gtk4|linux-headers-[0-9.]+-[0-9]+(-generic)?|linux-modules-[0-9.]+-[0-9]+-generic|pulseaudio|pulseaudio-utils|speedtest)$' \
+    | sort > "$OUT"
 echo "  wrote $(wc -l <"$OUT") packages -> ${OUT#"$PWD/"}"

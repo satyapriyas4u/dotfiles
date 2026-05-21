@@ -60,8 +60,12 @@ fi
 # Github uses "main" as the default branch name
 git config --global init.defaultBranch main
 
-# Check if already authenticated with GitHub to avoid re-authentication prompt
-if ! gh auth status &>/dev/null; then
+# Check if already authenticated with GitHub to avoid re-authentication prompt.
+# Skip the whole block if `gh` isn't installed yet — linux-packages.sh installs
+# it, but if that step was skipped you'd see a "gh: command not found" error.
+if ! command -v gh &>/dev/null; then
+    echo "gh CLI not installed yet; skipping GitHub auth. Re-run this script after linux-packages.sh, or run 'gh auth login' manually later."
+elif ! gh auth status &>/dev/null; then
     echo "You will need to authenticate with GitHub. Follow the prompts to login..."
     gh auth login
 else

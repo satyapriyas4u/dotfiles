@@ -56,6 +56,15 @@ done
 mkdir -p "${HOME}/.config/ruff"
 ln -sf "${dotfiledir}/settings/ruff.toml" "${HOME}/.config/ruff/ruff.toml"
 
+# autostart entries (Linux only — symlinks become inert on macOS)
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    mkdir -p "${HOME}/.config/autostart"
+    for desktop in "${dotfiledir}"/settings/autostart/*.desktop; do
+        [ -e "$desktop" ] || continue
+        ln -sf "$desktop" "${HOME}/.config/autostart/$(basename "$desktop")"
+    done
+fi
+
 # Run OS-specific scripts
 if [ "$OS_TYPE" = "macOS" ]; then
     echo "Running macOS installation scripts..."

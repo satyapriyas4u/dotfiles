@@ -84,12 +84,36 @@ to refresh one slice (e.g. `./capture/capture-vscode.sh`).
 
 1.  Clone this repo and run the usual `./install.sh`. The Linux path
     detects the `snapshots/` directory and offers to restore from it.
-2.  Before the apt restore, set up any third-party repositories listed in
+2.  Before the apt restore, run the interactive helper:
+    ```bash
+    ./installs/setup-third-party-repos.sh
+    ```
+    to enable the apt repos for Chrome, VS Code, AnyDesk, Grafana,
+    VirtualBox, Warp, etc. See
     [snapshots/THIRD-PARTY-REPOS.md](snapshots/THIRD-PARTY-REPOS.md)
-    (Chrome, VS Code, AnyDesk, Grafana, VirtualBox, Warp, Zoom, etc.).
+    for the full list (some apps like Zoom, MongoDB Compass, FortiClient,
+    EdrawMax have no apt repo and need a manual `.deb` download).
 3.  GNOME extensions are reinstalled fresh from extensions.gnome.org via
     `gnome-extensions-cli`. You'll need to log out and back in once for
     the shell to load them.
+
+### Known gotchas on Ubuntu 24.04
+
+-  **`texlive-full` is 4+ GB.** During my own migration the in.archive
+   mirror started returning `403 Forbidden` part-way through the download,
+   which cascaded to other packages in the same apt transaction. If you
+   see that, just re-run `./installs/restore-apt-packages.sh` after a
+   minute — apt picks up where it left off. If you don't need full
+   TeX Live, install `texlive-latex-recommended` instead.
+-  **Don't install `pulseaudio` on 24.04.** It conflicts with
+   `pipewire-audio` (the default), and pulling it in silently breaks audio.
+   It's filtered out of the apt snapshot for that reason.
+-  **Mainline kernel headers** (`linux-headers-6.8.12-060812-*`) aren't in
+   the standard archive. If you need a specific mainline kernel, grab it
+   from [kernel.ubuntu.com/mainline](https://kernel.ubuntu.com/mainline/)
+   directly. These are also filtered out of the snapshot.
+-  **VS Code without the Microsoft repo:** [vscode.sh](vscode.sh) offers
+   `snap install code --classic` as a fallback if `code` isn't found.
 
 To skip the snapshot restore on a given run (e.g. when bootstrapping a
 machine you don't want fully populated), export `SKIP_RESTORE=1` before

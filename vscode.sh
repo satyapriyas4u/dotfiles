@@ -12,10 +12,22 @@ if [ "$OS_TYPE" = "macOS" ] && [ -x "/opt/homebrew/bin/brew" ] && [[ ":$PATH:" !
     export PATH="/opt/homebrew/bin:$PATH"
 fi
 
-# Check if VS Code is installed
+# Check if VS Code is installed. On Linux, offer to install from the snap
+# store as a fallback (works without the Microsoft apt repo). On macOS we
+# don't auto-install — that's brew.sh's job.
 if ! command -v code &>/dev/null; then
-    echo "VS Code is not installed. Skipping VS Code setup..."
-    exit 0
+    if [ "$OS_TYPE" = "Linux" ] && command -v snap &>/dev/null; then
+        read -r -p "VS Code is not installed. Install via 'snap install code --classic'? [y/N] " ans
+        if [[ "$ans" =~ ^[Yy]$ ]]; then
+            sudo snap install code --classic
+        fi
+    fi
+    if ! command -v code &>/dev/null; then
+        echo "VS Code still not installed. Skipping VS Code setup..."
+        echo "  (Either set up the Microsoft apt repo via installs/setup-third-party-repos.sh,"
+        echo "   or install the snap manually: sudo snap install code --classic)"
+        exit 0
+    fi
 fi
 
 # Install VS Code extensions from the captured snapshot. The list is

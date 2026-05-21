@@ -5,7 +5,14 @@ Ubuntu archives. Set up these repositories on the new laptop **before** running
 `installs/restore-apt-packages.sh`, otherwise those packages will be reported
 as failures (the rest will still install).
 
-Run each block as a separate copy/paste. Most blocks need `sudo`.
+**Easiest path:** run the interactive helper instead of pasting from below:
+
+```bash
+./installs/setup-third-party-repos.sh
+```
+
+It walks you through each repo with a y/N prompt and runs `apt update` at the
+end. The manual blocks below are the fallback / reference.
 
 ## VS Code (`code`)
 

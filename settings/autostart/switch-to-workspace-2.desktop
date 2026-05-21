@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Switch to Workspace 2 on login
+Comment=Activates workspace 2 a few seconds after the session starts (X11 only — wmctrl does not work on Wayland).
+Exec=bash -c "sleep 3 && wmctrl -s 1"
+Icon=preferences-system-windows
+Terminal=false
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Phase=Applications

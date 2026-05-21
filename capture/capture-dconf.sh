@@ -30,6 +30,9 @@ dump gnome-terminal.dconf            /org/gnome/terminal/
 dump gnome-interface.dconf           /org/gnome/desktop/interface/
 dump gnome-input-sources.dconf       /org/gnome/desktop/input-sources/
 dump gnome-mutter.dconf              /org/gnome/mutter/
+dump gnome-wm-preferences.dconf      /org/gnome/desktop/wm/preferences/
 dump gnome-wm-keybindings.dconf      /org/gnome/desktop/wm/keybindings/
+dump gnome-shell-app-switcher.dconf  /org/gnome/shell/app-switcher/
+dump gnome-shell-window-switcher.dconf /org/gnome/shell/window-switcher/
 dump gnome-shell-keybindings.dconf   /org/gnome/shell/keybindings/
 dump gnome-media-keys.dconf          /org/gnome/settings-daemon/plugins/media-keys/

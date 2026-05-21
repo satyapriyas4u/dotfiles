@@ -29,6 +29,7 @@ packages=(
     "ffmpeg"
     "ripgrep"
     "gh"
+    "wmctrl"
 )
 
 # Loop over the array to install each package

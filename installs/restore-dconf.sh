@@ -26,12 +26,15 @@ if ! command -v dconf &>/dev/null; then
     exit 1
 fi
 
-load gnome-terminal.dconf           /org/gnome/terminal/
-load gnome-interface.dconf          /org/gnome/desktop/interface/
-load gnome-input-sources.dconf      /org/gnome/desktop/input-sources/
-load gnome-mutter.dconf             /org/gnome/mutter/
-load gnome-wm-keybindings.dconf     /org/gnome/desktop/wm/keybindings/
-load gnome-shell-keybindings.dconf  /org/gnome/shell/keybindings/
-load gnome-media-keys.dconf         /org/gnome/settings-daemon/plugins/media-keys/
+load gnome-terminal.dconf             /org/gnome/terminal/
+load gnome-interface.dconf            /org/gnome/desktop/interface/
+load gnome-input-sources.dconf        /org/gnome/desktop/input-sources/
+load gnome-mutter.dconf               /org/gnome/mutter/
+load gnome-wm-preferences.dconf       /org/gnome/desktop/wm/preferences/
+load gnome-wm-keybindings.dconf       /org/gnome/desktop/wm/keybindings/
+load gnome-shell-app-switcher.dconf   /org/gnome/shell/app-switcher/
+load gnome-shell-window-switcher.dconf /org/gnome/shell/window-switcher/
+load gnome-shell-keybindings.dconf    /org/gnome/shell/keybindings/
+load gnome-media-keys.dconf           /org/gnome/settings-daemon/plugins/media-keys/
 
 echo "dconf restore complete."
