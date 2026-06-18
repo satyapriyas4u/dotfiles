@@ -74,6 +74,17 @@ wget https://downloads.mongodb.com/compass/mongodb-compass_1.46.4_amd64.deb -O /
 sudo apt install -y /tmp/compass.deb
 ```
 
+## GitHub CLI (`gh`)
+
+```bash
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+    | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg >/dev/null
+sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+    | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
+sudo apt update
+```
+
 ## Warp Terminal (`warp-terminal`)
 
 ```bash

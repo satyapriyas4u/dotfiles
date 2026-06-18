@@ -80,6 +80,15 @@ setup_speedtest() {
         | sudo tee /etc/apt/sources.list.d/speedtest.list >/dev/null
 }
 
+setup_gh() {
+    ask "GitHub CLI (cli.github.com)" || return
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+        | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg >/dev/null
+    sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+        | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
+}
+
 setup_vscode
 setup_chrome
 setup_anydesk
@@ -87,6 +96,7 @@ setup_grafana
 setup_virtualbox
 setup_warp
 setup_speedtest
+setup_gh
 
 echo ""
 echo "Running apt-get update..."
