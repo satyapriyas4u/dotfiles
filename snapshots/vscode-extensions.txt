@@ -4,6 +4,7 @@ bierner.markdown-mermaid
 bpruitt-goddard.mermaid-markdown-syntax-highlighting
 charliermarsh.ruff
 christian-kohler.npm-intellisense
+corotata.pptx-preview
 dbaeumer.vscode-eslint
 docker.docker
 donjayamanne.githistory
@@ -13,7 +14,6 @@ eamodio.gitlens
 ecmel.vscode-html-css
 formulahendry.auto-rename-tag
 formulahendry.code-runner
-github.copilot-chat
 github.remotehub
 hashicorp.terraform
 hnw.vscode-auto-open-markdown-preview
@@ -37,6 +37,7 @@ ms-vscode.cpp-devtools
 ms-vscode.cpptools
 ms-vscode.cpptools-extension-pack
 ms-vscode.cpptools-themes
+ms-vscode.makefile-tools
 ms-vscode.remote-explorer
 ms-vscode-remote.remote-containers
 ms-vscode-remote.remote-ssh

@@ -63,6 +63,12 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         [ -e "$desktop" ] || continue
         ln -sf "$desktop" "${HOME}/.config/autostart/$(basename "$desktop")"
     done
+
+    # Create GNOME Templates so Nautilus shows New Document -> <type> for each
+    mkdir -p "${HOME}/Templates"
+    for tpl in "New Text File.txt" "New Shell Script.sh" "New Python Script.py" "New Markdown File.md"; do
+        [ -e "${HOME}/Templates/${tpl}" ] || touch "${HOME}/Templates/${tpl}"
+    done
 fi
 
 # Run OS-specific scripts
