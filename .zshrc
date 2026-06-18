@@ -134,12 +134,16 @@ yt_init() {
 }
 
 
-# Default WORDCHARS: *?_-.[]~=/&;!#$%^(){}<>
-# Modified to exclude forward slash for better path component deletion
-WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
-# Created by pipx
-export PATH="$PATH:/Users/coreyschafer/.local/bin"
+# Start agent only if needed
+if [ ! -S "$SSH_AUTH_SOCK" ]; then
+    eval "$(ssh-agent -a $SSH_AUTH_SOCK)" > /dev/null
+fi
 
-# Added by Antigravity
-export PATH="/Users/coreyschafer/.antigravity/antigravity/bin:$PATH"
+# Add keys only if agent has no identities
+if ! ssh-add -l >/dev/null 2>&1; then
+    for key in ~/.ssh/git ~/.ssh/id_ed25519 ~/.ssh/id_ed25519_aws; do
+        [ -f "$key" ] && ssh-add "$key"
+    done
+fi

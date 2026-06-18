@@ -1,23 +1,19 @@
 {
-  // BEGIN - Recording specific settings
-  "editor.fontSize": 18, // Use 18 for Screen Recordings
-  "debug.console.fontSize": 18, // Use 18 for Screen Recordings
-  "terminal.integrated.fontSize": 18, // Use 18 for Screen Recordings
-  "window.zoomLevel": -2, // Use 3 for Screen Recordings
-  "github.copilot.nextEditSuggestions.enabled": true,
-  "editor.inlineSuggest.enabled": true,
+  // ==========================================
+  // Recording Mode (Enable when recording)
+  // ==========================================
 
-  // Uncomment Below for Recording...
+  // "editor.fontSize": 18,
+  // "debug.console.fontSize": 18,
+  // "terminal.integrated.fontSize": 18,
+  // "window.zoomLevel": 3,
 
-  // "editor.fontSize": 18, // Use 18 for Screen Recordings
-  // "debug.console.fontSize": 18, // Use 18 for Screen Recordings
-  // "terminal.integrated.fontSize": 18, // Use 18 for Screen Recordings
-  // "window.zoomLevel": 3, // Use 3 for Screen Recordings
   // "editor.quickSuggestions": {
   //   "comments": "off",
-  //   "strings": "off"
-  //   "other": "on",
+  //   "strings": "off",
+  //   "other": "on"
   // },
+
   // "editor.lightbulb.enabled": "off",
   // "editor.parameterHints.enabled": false,
   // "editor.hover.enabled": false,
@@ -25,91 +21,202 @@
   // "editor.suggest.showSnippets": false,
   // "github.copilot.nextEditSuggestions.enabled": false,
 
-  // END - Recording specific settings
+  // ==========================================
+  // General UI & Workbench
+  // ==========================================
 
-  // General settings
-  "workbench.colorTheme": "Predawn",
-  "workbench.iconTheme": "ayu",
-  "editor.fontFamily": "Source Code Pro",
-  "debug.console.fontFamily": "Source Code Pro",
-  "editor.fontWeight": "500",
-  "terminal.integrated.fontWeight": "600",
+  "workbench.colorTheme": "Monokai",
+  "workbench.iconTheme": "material-icon-theme",
+
   "workbench.settings.openDefaultSettings": true,
   "workbench.settings.useSplitJSON": true,
   "workbench.settings.editor": "json",
   "workbench.startupEditor": "newUntitledFile",
+
+  "window.newWindowProfile": "Default",
+  "window.zoomLevel": -2,
+
+  "workbench.editor.enablePreview": false,
+
+  // ==========================================
+  // Editor
+  // ==========================================
+
+  "editor.fontFamily": "'DejaVu Sans Mono for Powerline'",
+  "editor.fontWeight": "500",
+  "editor.fontSize": 15,
+
   "editor.tabSize": 4,
   "editor.formatOnSave": true,
+
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+
   "editor.quickSuggestionsDelay": 200,
+  "editor.inlineSuggest.enabled": true,
+
   "editor.dragAndDrop": false,
   "editor.minimap.enabled": false,
+
+  "editor.multiCursorModifier": "ctrlCmd",
+
   "diffEditor.useInlineViewWhenSpaceIsLimited": false,
+  "diffEditor.ignoreTrimWhitespace": false,
+
+  // ==========================================
+  // Terminal
+  // ==========================================
+
+  "terminal.integrated.fontFamily": "MesloLGS NF",
+  "terminal.integrated.fontSize": 15,
+  "terminal.integrated.fontWeight": "normal",
+  "terminal.integrated.fontWeightBold": "bold",
+
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.cursorStyleInactive": "none",
+  "terminal.integrated.cursorBlinking": true,
+
+  "terminal.integrated.letterSpacing": 0.4,
+  "terminal.integrated.fontLigatures.enabled": true,
+
+  "terminal.integrated.scrollback": 10000,
+
+  "terminal.integrated.hideOnStartup": "whenEmpty",
+
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+
+  // ==========================================
+  // Files
+  // ==========================================
+
+  "files.autoSave": "afterDelay",
 
   "files.exclude": {
     "**/.git": false,
     "**/.mypy_cache": true
   },
 
-  // Zen Mode settings
-  "zenMode.centerLayout": false,
-  "zenMode.fullScreen": false,
-  "zenMode.hideLineNumbers": false,
-
-  // Copilot settings
-  "github.copilot.chat.agent.thinkingTool": true,
-  "github.copilot.chat.codesearch.enabled": true,
-  "github.copilot.chat.newWorkspace.useContext7": true,
-
-  "python.analysis.addHoverSummaries": true,
-
-  // Python settings
-  "python.venvPath": "~/venvs",
-  "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
-  "[python]": {
-    "editor.defaultFormatter": "charliermarsh.ruff",
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-      // "source.fixAll": "explicit"
-      "source.organizeImports": "explicit"
-    }
-  },
-  // "python.analysis.inlayHints.variableTypes": true,
-  // "python.analysis.inlayHints.functionReturnTypes": true,
-  "python.analysis.typeCheckingMode": "off", // Disable Pylance Checking so MyPy Extension is only used
-  "python.analysis.autoFormatStrings": true,
-
-  // Code Runner settings
-  "code-runner.clearPreviousOutput": true,
-  "code-runner.showExecutionMessage": false,
-  "code-runner.ignoreSelection": true,
-  "code-runner.saveFileBeforeRun": true,
-  "code-runner.executorMap": {
-    "python": "\"$pythonPath\" -u $fullFileName"
-  },
-  "code-runner.enableAppInsights": false,
-
-  // HTML, Jinja2, and Django settings
-  "django.snippets.use": false,
-  "[html][django-html][jinja][jinja-html]": {
-    "editor.defaultFormatter": "monosans.djlint",
-    "editor.tabSize": 2
-  },
   "files.associations": {
     "*.html": "django-html",
     "*.svg": "html"
   },
+
+  // ==========================================
+  // Git
+  // ==========================================
+
+  "git.autofetch": true,
+  "git.mergeEditor": true,
+  "git.ignoreRebaseWarning": true,
+
+  "merge-conflict.autoNavigateNextConflict.enabled": true,
+
+  // ==========================================
+  // AI / Copilot / Claude
+  // ==========================================
+
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "github.copilot.chat.agent.thinkingTool": true,
+  "github.copilot.chat.codesearch.enabled": true,
+  "github.copilot.chat.newWorkspace.useContext7": true,
+
+  "tabnine.experimentalAutoImports": true,
+  "claudeCode.preferredLocation": "panel",
+
+  // ==========================================
+  // Python
+  // ==========================================
+
+  "python.analysis.typeCheckingMode": "standard",
+  "python.analysis.autoFormatStrings": true,
+  "python.analysis.addHoverSummaries": true,
+  "python.venvPath": "~/venvs",
+  "python.defaultInterpreterPath": "/usr/bin/python3",
+  "python.terminal.useEnvFile": true,
+
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+
+  // ==========================================
+  // Notebook
+  // ==========================================
+
+  "notebook.defaultFormatter": "charliermarsh.ruff",
+  "notebook.formatOnSave.enabled": true,
+
+  "notebook.codeActionsOnSave": {
+    "notebook.source.organizeImports": "explicit"
+  },
+
+  "notebook.insertFinalNewline": true,
+  "notebook.output.scrolling": true,
+  "notebook.lineNumbers": "on",
+  "notebook.scrolling.revealNextCellOnExecute": "none",
+
+  // ==========================================
+  // HTML / Django / Jinja
+  // ==========================================
+
+  "django.snippets.use": false,
+
+  "[html][django-html][jinja][jinja-html]": {
+    "editor.defaultFormatter": "monosans.djlint",
+    "editor.tabSize": 2
+  },
+
   "emmet.includeLanguages": {
     "django-html": "html",
     "jinja-html": "html"
   },
+
   "djlint.useVenv": false,
   "djlint.pythonPath": "/opt/pipx/venvs/djlint/bin/python",
-  "djlint.ignore": ["H031", "D004", "H023", "D018"],
+
+  "djlint.ignore": [
+    "H031",
+    "D004",
+    "H023",
+    "D018"
+  ],
+
   "djlint.maxBlankLines": 1,
   "djlint.lineBreakAfterMultilineTag": false,
 
-  // Plaintext settings
+  // ==========================================
+  // YAML / Docker / GitHub Actions
+  // ==========================================
+
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    },
+
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+
+  // ==========================================
+  // Plain Text
+  // ==========================================
+
   "[plaintext]": {
     "editor.quickSuggestions": {
       "comments": "off",
@@ -118,25 +225,164 @@
     }
   },
 
-  // Shell script settings
-  "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+  // ==========================================
+  // Code Runner
+  // ==========================================
+
+  "code-runner.clearPreviousOutput": true,
+  "code-runner.showExecutionMessage": false,
+  "code-runner.ignoreSelection": true,
+  "code-runner.saveFileBeforeRun": true,
+
+  "code-runner.executorMap": {
+    "python": "\"$pythonPath\" -u $fullFileName"
   },
 
-  // Notebook settings
-  "notebook.defaultFormatter": "charliermarsh.ruff",
-  "notebook.formatOnSave.enabled": true,
-  "notebook.codeActionsOnSave": {
-    "notebook.source.organizeImports": "explicit"
-  },
-  "notebook.insertFinalNewline": true,
-  "notebook.output.scrolling": true,
-  "notebook.lineNumbers": "on",
-  "notebook.scrolling.revealNextCellOnExecute": "none",
+  "code-runner.enableAppInsights": false,
 
-  // SQL Tools settings
+  // ==========================================
+  // Docker / Containers
+  // ==========================================
+
+  "docker.containers.description": [
+    "ContainerName",
+    "Image",
+    "Status"
+  ],
+
+  "docker.images.sortBy": "CreatedTime",
+
+  "containers.containers.description": [
+    "ContainerName",
+    "Image",
+    "Status"
+  ],
+
+"containers.images.sortBy": "CreatedTime",
+
+  "docker.extension.enableComposeLanguageServer": false,
+
+  // ==========================================
+  // Remote SSH
+  // ==========================================
+
+  "remote.SSH.connectTimeout": 40,
+
+  // ==========================================
+  // SQL / Live Server
+  // ==========================================
+
   "sqltools.useNodeRuntime": true,
-  "liveServer.settings.donotShowInfoMsg": true
+  "liveServer.settings.donotShowInfoMsg": true,
 
-  // Miscellaneous settings (Likely added Dynamically)
+  // ==========================================
+  // Zen Mode
+  // ==========================================
+
+  "zenMode.centerLayout": false,
+  "zenMode.fullScreen": false,
+  "zenMode.hideLineNumbers": false,
+
+  // ==========================================
+  // Misc
+  // ==========================================
+
+  "explorer.confirmDelete": false,
+
+  "redhat.telemetry.enabled": true,
+
+  "azureTerraform.survey": {
+    "surveyPromptDate": "2025-08-23T07:16:20.383Z",
+    "surveyPromptIgnoredCount": 0
+  },
+
+  "chat.instructionsFilesLocations": {
+    ".github/instructions": true,
+    "/tmp/postman-collections-post-response.instructions.md": true,
+    "/tmp/postman-collections-pre-request.instructions.md": true,
+    "/tmp/postman-folder-post-response.instructions.md": true,
+    "/tmp/postman-folder-pre-request.instructions.md": true
+  },
+
+  "cSpell.userWords": [
+    "ainsert",
+    "ainvoke",
+    "Anmol",
+    "aquery",
+    "ASGI",
+    "asyncio",
+    "asyncpg",
+    "autofetch",
+    "biobert",
+    "Biocompatibility",
+    "biomistral",
+    "checkpointer",
+    "CUDA",
+    "deepagents",
+    "deepseek",
+    "dotenv",
+    "embedder",
+    "EUMDN",
+    "fastapi",
+    "flet",
+    "frombuffer",
+    "GROQ",
+    "GSPR",
+    "healthcheck",
+    "hstack",
+    "httpx",
+    "HUGGINGFACE",
+    "initdb",
+    "jsonify",
+    "k-nearest-neighbors",
+    "knn",
+    "kokoro",
+    "Kushwaha",
+    "langchain",
+    "langgraph",
+    "langsmith",
+    "levelname",
+    "lightrag",
+    "medllama",
+    "Merai",
+    "MILVUS",
+    "mkdocs",
+    "msal",
+    "numpy",
+    "Nuomics",
+    "nuvox",
+    "ollama",
+    "openpyxl",
+    "pgvector",
+    "pinecone",
+    "pipmaster",
+    "Postgre",
+    "procps",
+    "pyaudio",
+    "pymilvus",
+    "pymongo",
+    "pyproject",
+    "pytest",
+    "redoc",
+    "rxconfig",
+    "Satyapriya",
+    "similarity",
+    "sounddevice",
+    "SQLDB",
+    "Stanly",
+    "Sterilisation",
+    "streamvision",
+    "tabnine",
+    "tiktoken",
+    "userinfo",
+    "USFDA",
+    "uvicorn",
+    "vectordb",
+    "venv",
+    "VITE",
+    "vllm"
+  ],
+  "makefile.configureOnOpen": true,
+  "chat.viewSessions.orientation": "stacked",
+  "terminal.integrated.gpuAcceleration": "on"
 }

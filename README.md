@@ -135,6 +135,9 @@ You're encouraged to modify the scripts and configuration files to suit your pre
 
 -  **Dotfiles**: Edit `.shared_prompt`, `.zprompt`, `.bash_prompt` to add or modify shell configurations.
 -  **Sublime Text and VS Code**: Adjust settings in the `settings/` directory to change editor preferences and themes.
+-  **Workspace 2 on login**: The Linux installer currently includes `settings/autostart/switch-to-workspace-2.desktop`, which runs `wmctrl -s 1` after login on X11 and switches GNOME to workspace 2.
+-  **Right-click terminal and new text file support**: The installer now adds `nautilus-extension-gnome-terminal` and creates `~/Templates/New Text File.txt` on Linux. That enables Nautilus context menu actions like "Open in Terminal" and "New Document → New Text File".
+-  **Capture current settings**: After making desktop or GNOME changes, run `./capture/capture-all.sh` to refresh `snapshots/`. Then commit the updated snapshot files with `git add snapshots/ && git commit -m "refresh snapshot"`.
 
 ## Contributing
 

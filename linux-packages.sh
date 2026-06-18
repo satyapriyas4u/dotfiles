@@ -30,6 +30,7 @@ packages=(
     "ripgrep"
     "gh"
     "wmctrl"
+    "nautilus-extension-gnome-terminal"
 )
 
 # Loop over the array to install each package
