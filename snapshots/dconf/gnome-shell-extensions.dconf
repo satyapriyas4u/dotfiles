@@ -43,7 +43,7 @@ sigma=30
 
 [caffeine]
 cli-toggle=false
-indicator-position-max=1
+indicator-position-max=2
 toggle-state=true
 user-enabled=true
 

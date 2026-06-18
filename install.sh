@@ -66,7 +66,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
     # Create GNOME Templates so Nautilus shows New Document -> <type> for each
     mkdir -p "${HOME}/Templates"
-    for tpl in "New Text File.txt" "New Shell Script.sh" "New Python Script.py" "New Markdown File.md"; do
+    for tpl in "New Text File" "New Shell Script" "New Python Script" "New Markdown File"; do
         [ -e "${HOME}/Templates/${tpl}" ] || touch "${HOME}/Templates/${tpl}"
     done
 fi

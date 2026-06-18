@@ -2,6 +2,7 @@ brave
 chromium
 firefox
 gimp
+glab
 postman
 slack
 snap-store
