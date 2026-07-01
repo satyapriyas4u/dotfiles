@@ -56,6 +56,11 @@ if [[ ! -r ~/.p10k.zsh ]]; then
     echo "Copied .p10k.zsh directly (symlink was not readable)"
 fi
 
+# Clear stale instant prompt cache — if it was created before .p10k.zsh existed
+# it replays the wizard warning on every terminal start. Always regenerate.
+rm -f ~/.cache/p10k-instant-prompt-*.zsh ~/.cache/p10k-instant-prompt-*.zsh.zwc
+echo "Cleared p10k instant prompt cache (will regenerate on next terminal open)."
+
 # Set zsh as default shell
 ZSH_PATH=$(which zsh)
 if [ "$SHELL" != "$ZSH_PATH" ]; then
