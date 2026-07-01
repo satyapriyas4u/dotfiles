@@ -983,6 +983,11 @@
   # Default context format (no privileges, no SSH): user@hostname.
   typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE='%n@%m'
 
+  # On remote/SSH sessions show a shortened hostname:
+  #   innmi1srh1-p039.domain  →  satya@p039   (last segment after last dash)
+  #   jhelum.merai.cloud      →  satya@jhelum (no dash → keep short hostname)
+  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_CONTENT_EXPANSION='%n@${${HOST%%.*}##*-}'
+
   # Don't show context unless running with privileges or in SSH.
   # Tip: Remove the next line to always show context.
   typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_{CONTENT,VISUAL_IDENTIFIER}_EXPANSION=

@@ -43,9 +43,18 @@ fi
 chmod +x ~/dotfiles/installs/install-zsh-p10k.sh
 ~/dotfiles/installs/install-zsh-p10k.sh --no-fonts
 
-# Symlink dotfiles only — skip GNOME/apt/snap/package restore
+# Symlink dotfiles only — skip GNOME/apt/snap/package restore.
+# Run twice: oh-my-zsh installer may rewrite ~/.zshrc after the first pass.
 chmod +x ~/dotfiles/install.sh
 ~/dotfiles/install.sh --links-only
+~/dotfiles/install.sh --links-only
+
+# Hard-copy .p10k.zsh if the symlink is broken or unreadable (e.g. on first
+# deploy before the dotfiles path is fully resolved by the new shell).
+if [[ ! -r ~/.p10k.zsh ]]; then
+    cp ~/dotfiles/.p10k.zsh ~/.p10k.zsh
+    echo "Copied .p10k.zsh directly (symlink was not readable)"
+fi
 
 # Set zsh as default shell
 ZSH_PATH=$(which zsh)
