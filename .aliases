@@ -58,9 +58,9 @@ alias tut_env='source ~/venvs/tutorial/bin/activate'
 alias fd='find . -type d -iname'
 alias ff='find . -type f -iname'
 
-# Git
-alias gcaa='git add -A && git commit -v'
-alias gcam='git add -A && git commit --amend'
+# Git (custom — not provided by oh-my-zsh git plugin)
+alias gcaa='git add -A && git commit -v'     # stage everything + commit verbosely
+alias gcamd='git add -A && git commit --amend' # stage everything + amend last commit
 
 # Desktop notification when a long command finishes (Linux only)
 # Usage: sleep 10; alert

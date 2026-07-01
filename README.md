@@ -119,6 +119,178 @@ To skip the snapshot restore on a given run (e.g. when bootstrapping a
 machine you don't want fully populated), export `SKIP_RESTORE=1` before
 running `./install.sh`.
 
+## Aliases & Shell Commands
+
+### Custom Aliases (`.aliases`)
+
+#### General Shortcuts
+
+| Alias | Expands to | Description |
+|---|---|---|
+| `hg` | `history 0 \| grep` | Search command history |
+| `ch` | `history 0 \| grep "git commit"` | Show all past commits |
+| `supdate` | `~/dotfiles/installs/update_upgrade.sh` | Run system apt update + upgrade |
+| `alert` | `notify-send …` | Desktop notification when a long command finishes: `sleep 30; alert` |
+
+#### File Listing
+
+| Alias | Expands to | Description |
+|---|---|---|
+| `ls` | `ls --color` | Always colorized |
+| `la` | `ls -lahF --color` | Long list, all files, human-readable sizes |
+| `ll` | `ls -alF --color` | Long list, all files |
+| `l` | `ls -CF --color` | Compact columns |
+
+#### Search
+
+| Alias | Expands to | Description |
+|---|---|---|
+| `fd` | `find . -type d -iname` | Find directories by name |
+| `ff` | `find . -type f -iname` | Find files by name |
+| `grep` | `grep --color=auto` | Always colorized grep |
+
+#### Git (custom, not in oh-my-zsh plugin)
+
+| Alias | Expands to | Description |
+|---|---|---|
+| `gcaa` | `git add -A && git commit -v` | Stage everything and commit (verbose diff in editor) |
+| `gcamd` | `git add -A && git commit --amend` | Stage everything and amend last commit |
+
+#### Python / Virtual Environments
+
+| Alias | Expands to | Description |
+|---|---|---|
+| `tut_env` | `source ~/venvs/tutorial/bin/activate` | Activate the tutorial venv |
+| `wipe_env` | `rm -rf ~/venvs/tutorial && python3 -m venv ~/venvs/tutorial` | Recreate tutorial venv from scratch |
+
+#### YouTube / Workspace (machine-specific)
+
+| Alias | Expands to | Description |
+|---|---|---|
+| `yt` | `code ~/My_Drive/YouTube/Scripts/` | Open YouTube scripts in VS Code |
+| `cyt` | `cd ~/My_Drive/YouTube/Scripts/` | cd to YouTube scripts |
+
+---
+
+### Git Plugin Aliases (oh-my-zsh `git` plugin — active automatically)
+
+These are provided by `plugins=(git)` in `.zshrc`. No setup needed — just type them.
+
+#### Add
+
+| Alias | Git command |
+|---|---|
+| `ga` | `git add` |
+| `gaa` | `git add --all` |
+| `gapa` | `git add --patch` (interactive hunk staging) |
+| `gau` | `git add --update` (tracked files only) |
+
+#### Branch
+
+| Alias | Git command |
+|---|---|
+| `gb` | `git branch` |
+| `gba` | `git branch --all` |
+| `gbd` | `git branch --delete` |
+| `gbD` | `git branch --delete --force` |
+| `gbgd` | Delete all local branches whose remote is gone |
+
+#### Checkout / Switch
+
+| Alias | Git command |
+|---|---|
+| `gco` | `git checkout` |
+| `gcb` | `git checkout -b` (create + switch) |
+| `gcm` | `git checkout main` |
+| `gsw` | `git switch` |
+| `gswc` | `git switch --create` |
+
+#### Commit
+
+| Alias | Git command |
+|---|---|
+| `gc` | `git commit --verbose` |
+| `gca` | `git commit --verbose --all` |
+| `gc!` | `git commit --verbose --amend` |
+| `gcn!` | `git commit --verbose --no-edit --amend` |
+| `gcmsg` | `git commit --message` |
+| `gcam` | `git commit --all --message` |
+
+#### Diff
+
+| Alias | Git command |
+|---|---|
+| `gd` | `git diff` |
+| `gdca` | `git diff --cached` (staged changes) |
+| `gds` | `git diff --staged` |
+| `gdw` | `git diff --word-diff` |
+
+#### Fetch / Pull / Push
+
+| Alias | Git command |
+|---|---|
+| `gf` | `git fetch` |
+| `gfo` | `git fetch origin` |
+| `gl` | `git pull` |
+| `gpr` | `git pull --rebase` |
+| `ggpull` | `git pull origin <current-branch>` |
+| `gp` | `git push` |
+| `gpf` | `git push --force-with-lease` (safe force push) |
+| `gpf!` | `git push --force` |
+| `ggpush` | `git push origin <current-branch>` |
+
+#### Log
+
+| Alias | Git command |
+|---|---|
+| `glog` | `git log --oneline --decorate --graph` |
+| `gloga` | `git log --oneline --decorate --graph --all` |
+| `glol` | Colored graph log with author + relative time |
+| `glo` | `git log --oneline --decorate` |
+| `glg` | `git log --stat` |
+
+#### Merge / Rebase
+
+| Alias | Git command |
+|---|---|
+| `gm` | `git merge` |
+| `gmom` | `git merge origin/main` |
+| `gma` | `git merge --abort` |
+| `grb` | `git rebase` |
+| `grbi` | `git rebase --interactive` |
+| `grbc` | `git rebase --continue` |
+| `grba` | `git rebase --abort` |
+
+#### Reset / Restore
+
+| Alias | Git command |
+|---|---|
+| `grh` | `git reset` |
+| `grhh` | `git reset --hard` |
+| `grhs` | `git reset --soft` |
+| `grs` | `git restore` |
+| `grss` | `git restore --source` |
+
+#### Stash
+
+| Alias | Git command |
+|---|---|
+| `gstl` | `git stash list` |
+| `gstp` | `git stash pop` |
+| `gsts` | `git stash show --patch` |
+| `gstd` | `git stash drop` |
+| `gstu` | `git stash push --include-untracked` |
+
+#### Status
+
+| Alias | Git command |
+|---|---|
+| `gst` | `git status` |
+| `gss` | `git status --short` |
+| `gsb` | `git status --short --branch` |
+
+---
+
 ## Configuration Files
 
 -  `.bashrc` & `.zshrc`: Shell configuration files for Bash and Zsh.
