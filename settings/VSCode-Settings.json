@@ -364,6 +364,7 @@
     "pyproject",
     "pytest",
     "redoc",
+    "regclaw",
     "rxconfig",
     "Satyapriya",
     "similarity",
@@ -384,5 +385,7 @@
   ],
   "makefile.configureOnOpen": true,
   "chat.viewSessions.orientation": "stacked",
-  "terminal.integrated.gpuAcceleration": "on"
+  "terminal.integrated.gpuAcceleration": "on",
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilotcli:claude-haiku-4.5"
 }

@@ -3,7 +3,16 @@
 # This script creates symlinks from the home directory to any desired dotfiles in $HOME/dotfiles
 # Detects OS and runs appropriate installation scripts
 # Checks for zsh before proceeding
+#
+# Flags:
+#   --links-only   Only create symlinks; skip OS-specific install scripts.
+#                  Use this on remote servers after running install-zsh-p10k.sh.
 ############################
+
+LINKS_ONLY=false
+for arg in "$@"; do
+    [[ "$arg" == "--links-only" ]] && LINKS_ONLY=true
+done
 
 # Check if zsh is installed
 if ! command -v zsh &>/dev/null; then
@@ -20,7 +29,6 @@ if [ -f /etc/os-release ]; then
   . /etc/os-release
   echo "$NAME $VERSION"
 fi
-
 
 echo "zsh is installed. Proceeding with installation..."
 
@@ -55,6 +63,23 @@ done
 # create symlinks for configs (will overwrite old configs)
 mkdir -p "${HOME}/.config/ruff"
 ln -sf "${dotfiledir}/settings/ruff.toml" "${HOME}/.config/ruff/ruff.toml"
+
+# SSH config: use Include so ~/.ssh/config stays minimal
+mkdir -p "${HOME}/.ssh"
+chmod 700 "${HOME}/.ssh"
+if ! grep -q "Include ~/dotfiles/ssh/config" "${HOME}/.ssh/config" 2>/dev/null; then
+    # Prepend Include line — ssh reads it first, then the rest of the file
+    tmpfile=$(mktemp)
+    printf 'Include ~/dotfiles/ssh/config\n\n' | cat - "${HOME}/.ssh/config" 2>/dev/null > "$tmpfile"
+    mv "$tmpfile" "${HOME}/.ssh/config"
+    chmod 600 "${HOME}/.ssh/config"
+    echo "Added SSH config Include for dotfiles/ssh/config"
+fi
+
+if [[ "$LINKS_ONLY" == true ]]; then
+    echo "Installation Complete! (links-only mode — skipped OS scripts)"
+    exit 0
+fi
 
 # autostart entries (Linux only — symlinks become inert on macOS)
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then

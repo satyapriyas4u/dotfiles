@@ -1,8 +1,17 @@
 #!/usr/bin/env bash
 # Sets up Oh My Zsh + Powerlevel10k theme + MesloLGS NF fonts for zsh.
 # Safe to re-run: each step checks if already done before acting.
+#
+# Flags:
+#   --no-fonts   Skip font download (use on remote servers — VS Code renders
+#                fonts from the local machine, so the remote doesn't need them).
 
 set -e
+
+SKIP_FONTS=false
+for arg in "$@"; do
+    [[ "$arg" == "--no-fonts" ]] && SKIP_FONTS=true
+done
 
 FONT_DIR="${HOME}/.local/share/fonts"
 FONT_BASE="https://github.com/romkatv/powerlevel10k-media/raw/master"
@@ -43,38 +52,41 @@ clone_plugin zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-hig
 clone_plugin zsh-completions         https://github.com/zsh-users/zsh-completions
 
 # ── 4. MesloLGS NF fonts ─────────────────────────────────────────────────────
-echo "Installing MesloLGS NF fonts to ${FONT_DIR}..."
-mkdir -p "$FONT_DIR"
+if [[ "$SKIP_FONTS" == true ]]; then
+    echo "Skipping font installation (--no-fonts). VS Code renders fonts from local machine."
+else
+    echo "Installing MesloLGS NF fonts to ${FONT_DIR}..."
+    mkdir -p "$FONT_DIR"
 
-declare -a FONTS=(
-    "MesloLGS NF Regular.ttf"
-    "MesloLGS NF Bold.ttf"
-    "MesloLGS NF Italic.ttf"
-    "MesloLGS NF Bold Italic.ttf"
-)
+    declare -a FONTS=(
+        "MesloLGS NF Regular.ttf"
+        "MesloLGS NF Bold.ttf"
+        "MesloLGS NF Italic.ttf"
+        "MesloLGS NF Bold Italic.ttf"
+    )
 
-for font in "${FONTS[@]}"; do
-    dest="${FONT_DIR}/${font}"
-    if [ -f "$dest" ]; then
-        echo "  Already present: ${font}"
-    else
-        echo "  Downloading: ${font}"
-        curl -fsSL "${FONT_BASE}/$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "${font}")" \
-            -o "$dest"
-    fi
-done
+    for font in "${FONTS[@]}"; do
+        dest="${FONT_DIR}/${font}"
+        if [ -f "$dest" ]; then
+            echo "  Already present: ${font}"
+        else
+            echo "  Downloading: ${font}"
+            curl -fsSL "${FONT_BASE}/$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "${font}")" \
+                -o "$dest"
+        fi
+    done
 
-echo "Refreshing font cache..."
-fc-cache -f "$FONT_DIR"
+    echo "Refreshing font cache..."
+    fc-cache -f "$FONT_DIR"
+
+    echo ""
+    echo "Next steps:"
+    echo "  1. Set your terminal font to 'MesloLGS NF' (Regular, size 12-13)."
+    echo "     GNOME Terminal: Preferences → Profile → Text → Custom font"
+fi
 
 echo ""
 echo "Done!"
-echo ""
-echo "Next steps:"
-echo "  1. Set your terminal font to 'MesloLGS NF' (Regular, size 12-13)."
-echo "     GNOME Terminal: Preferences → Profile → Text → Custom font"
-echo "  2. Restart your terminal or run: source ~/.zshrc"
-echo "  3. Run 'p10k configure' to customize your prompt."
 echo ""
 echo "Completion shortcuts:"
 echo "  → (right arrow)  accept autosuggestion"

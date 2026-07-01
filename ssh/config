@@ -1,0 +1,85 @@
+# ── NuvoAI Servers ────────────────────────────────────────────────────────────
+
+Host nuvoai-server-jhelum
+  HostName jhelum.merai.cloud
+  Port 2222
+  User satya
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+
+Host nuvoai-server-neysa
+  HostName tons.merai.cloud
+  Port 2222
+  User satya
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+
+Host nuvoai-server-saryu
+  HostName saryu.merai.cloud
+  Port 50803
+  User satya
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+
+Host nuvoai-server-padma
+  HostName 10.120.130.64
+  Port 50803
+  User satya
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+
+Host nuvoai-server-narmada
+  HostName narmada.merai.cloud
+  Port 7722
+  User ss57176k
+  IdentityFile ~/.ssh/id_ed25519
+
+# ── Kanpur Servers ────────────────────────────────────────────────────────────
+
+Host kanpur-server-everest
+  HostName 10.11.6.132
+  Port 6622
+  User satyapriya
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+
+Host kanpur-server-mtk2
+  HostName 10.11.6.125
+  User satyapriya
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+
+Host kanpur-server-apogen-regos
+  HostName 10.11.6.102
+  User regos
+
+Host kanpur-server-apogen-satya
+  HostName 10.11.6.102
+  User satyapriya
+
+# ── Azure Servers ─────────────────────────────────────────────────────────────
+
+Host azure-server-1-rish
+  HostName 20.197.54.228
+  Port 7722
+  User rishabhk
+
+Host Azure-server-2-rkusum
+  HostName 20.197.54.228
+  Port 7722
+  User kusumr
+
+# ── Merai Cloud ───────────────────────────────────────────────────────────────
+
+Host merai-cloud-brahmaputra
+  HostName brahmaputra.merai.cloud
+  User sc57060vb
+  Port 13378
+
+# ── Git Hosting ───────────────────────────────────────────────────────────────
+
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/git
+  IdentitiesOnly yes
