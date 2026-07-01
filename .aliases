@@ -15,6 +15,8 @@ fi
 
 # List all files colorized in long format, including dot files
 alias la="ls -lahF ${colorflag}"
+alias ll="ls -alF ${colorflag}"
+alias l="ls -CF ${colorflag}"
 
 # Always use color output for `ls`
 alias ls="command ls ${colorflag}"
@@ -55,3 +57,12 @@ alias tut_env='source ~/venvs/tutorial/bin/activate'
 # Find Files and Directories
 alias fd='find . -type d -iname'
 alias ff='find . -type f -iname'
+
+# Git
+alias gc='git commit'
+alias gcaa='git add -A && git commit -v'
+alias gcam='git add -A && git commit --amend'
+
+# Desktop notification when a long command finishes (Linux only)
+# Usage: sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
