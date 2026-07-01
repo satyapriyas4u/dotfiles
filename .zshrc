@@ -179,18 +179,20 @@ yt_init() {
 }
 
 
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-
-# Start agent only if needed
-if [ ! -S "$SSH_AUTH_SOCK" ]; then
-    eval "$(ssh-agent -a $SSH_AUTH_SOCK)" > /dev/null
-fi
-
-# Add keys only if agent has no identities
-if ! ssh-add -l >/dev/null 2>&1; then
-    for key in ~/.ssh/git ~/.ssh/id_ed25519 ~/.ssh/id_ed25519_aws; do
-        [ -f "$key" ] && ssh-add "$key"
-    done
+# SSH agent — local desktop only.
+# On remote servers VS Code Remote SSH forwards your local agent automatically
+# via SSH_AUTH_SOCK, so no agent needs to be started there.
+# XDG_RUNTIME_DIR is only set by the desktop session (pam_systemd); skip on servers.
+if [[ -n "${XDG_RUNTIME_DIR:-}" ]]; then
+    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+    if [ ! -S "$SSH_AUTH_SOCK" ]; then
+        eval "$(ssh-agent -a "$SSH_AUTH_SOCK")" > /dev/null
+    fi
+    if ! ssh-add -l >/dev/null 2>&1; then
+        for key in ~/.ssh/git ~/.ssh/id_ed25519 ~/.ssh/id_ed25519_aws; do
+            [ -f "$key" ] && ssh-add "$key"
+        done
+    fi
 fi
 
 export NVM_DIR="$HOME/.nvm"
