@@ -182,8 +182,10 @@ yt_init() {
 # SSH agent — local desktop only.
 # On remote servers VS Code Remote SSH forwards your local agent automatically
 # via SSH_AUTH_SOCK, so no agent needs to be started there.
-# XDG_RUNTIME_DIR is only set by the desktop session (pam_systemd); skip on servers.
-if [[ -n "${XDG_RUNTIME_DIR:-}" ]]; then
+# Guard on both: SSH_CONNECTION unset (not an SSH session) AND XDG_RUNTIME_DIR set
+# (desktop login session). Some servers have XDG_RUNTIME_DIR via systemd user
+# sessions, so checking only XDG_RUNTIME_DIR is not sufficient.
+if [[ -z "${SSH_CONNECTION:-}" && -n "${XDG_RUNTIME_DIR:-}" ]]; then
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
     if [ ! -S "$SSH_AUTH_SOCK" ]; then
         eval "$(ssh-agent -a "$SSH_AUTH_SOCK")" > /dev/null
