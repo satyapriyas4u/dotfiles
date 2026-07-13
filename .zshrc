@@ -1,3 +1,14 @@
+# Some terminals (VS Code/Cursor integrated terminals inside Docker containers,
+# certain SSH launch paths) spawn zsh without job control. Powerlevel10k's
+# gitstatusd background daemon needs `setopt monitor` to start; when it can't,
+# gitstatus fails and p10k aborts before sourcing ~/.p10k.zsh, which is what
+# produces the "config file was not sourced" wizard warning. Disabling the
+# daemon makes p10k fall back to zsh's built-in vcs_info for git status, which
+# has no job-control dependency, so the failure can't happen regardless of
+# terminal/launch path. Must be set before Oh My Zsh sources the p10k theme
+# below, and before the instant-prompt block (it replays this decision too).
+typeset -g POWERLEVEL9K_DISABLE_GITSTATUS=true
+
 # Enable Powerlevel10k instant prompt. Must stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
